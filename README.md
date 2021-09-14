@@ -1,6 +1,6 @@
 # Timer
-A microservice which allows you to create timers which checks a value every set amount of time. It also allows you to check how many timers are running at one time
-A microservice which keeps track of how many users are online aswell as the details of those users. The information is stored inside a redis store using dapr and docker kubernetes. It assigns each user a key in the form of a GUID (Globally Unique Identifier) where its information is stored. A list of all the user keys is also stored for ease of access.
+A microservice which allows you to create timers which checks a value every set amount of time. It also allows you to check how many timers are running at one time. You are able to customise the timers intial delay time, intermidiate delay time and what conditions cause the timers to break. By removing one line of code you can also make the timers run indefinitly.
+
 
 # Prerequisites
 #### Installation of Docker 
@@ -10,9 +10,6 @@ A microservice which keeps track of how many users are online aswell as the deta
 #### Installation of Dapr 
 ![Dapr](https://github.com/AlexanderAzzopardi/UnitConvertor/blob/main/Saved%20Pictures/DaprLogo.jfif)
 > <https://docs.microsoft.com/en-us/dotnet/architecture/dapr-for-net-developers/getting-started>
-
-#### Installation of RestClient
-Search **RestClient** in the extension tab and install. 
 
 # Redis Store
 When setting up a redis store you need to create a .yaml file 
@@ -67,9 +64,9 @@ A method needs to be created in *StatusCheckerController.cs* which contains the 
     
 ## Commands
 ### Creating an instance of a timer
-To create an instance of a timer you need to run a http request, inside a *.http* file, like the one below. *timeDelay* is the delay from the timers creation before it starts (in ms). *timeInterval* is how often the timer ticks (in ms).
+To create an instance of a timer you need to run a http request, inside a *.http* file, like the one below. *"timeDelay"* is the delay from the timers creation before it starts (in ms). *"timeInterval"* is how often the timer ticks (in ms).
     
-    GET http://localhost:5020/v1.0/invoke/timer/method/timer HTTP/1.1
+    GET http://localhost:5010/v1.0/invoke/timer/method/timer HTTP/1.1
     content-type: application/json
 
     {
@@ -80,7 +77,7 @@ To create an instance of a timer you need to run a http request, inside a *.http
 ### Checking timers active
 This command checks how many timers are currently running.
     
-    GET http://localhost:5020/v1.0/invoke/timer/method/timerchecker HTTP/1.1
+    GET http://localhost:5010/v1.0/invoke/timer/method/timerchecker HTTP/1.1
     
     
     
